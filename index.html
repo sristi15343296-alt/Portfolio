@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Interactive AI portfolio for Sristi." />
+  <title>Sristi Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="screen" data-screen>
+    <canvas id="fluid" class="fluid-bg" data-fluid-bg aria-hidden="true"></canvas>
+    <canvas class="fluid-transition" data-fluid-transition aria-hidden="true"></canvas>
+    <div class="watermark" aria-hidden="true">Sristi</div>
+
+    <a class="top-cta" href="assets/docs/Sristi-CV.pdf" download>
+      <span class="cta-logo">S</span>
+      <span class="desktop-text">Download Sristi's CV</span>
+      <span class="mobile-text">CV</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+    </a>
+
+    <section class="hero" data-hero aria-labelledby="hero-title">
+      <div class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64"><path d="M12 13l20 9 20-9v13L32 36 12 26V13z"/><path d="M12 31l20 10 20-10v13L32 55 12 44V31z"/></svg>
+      </div>
+
+      <div class="intro">
+        <h2>Hey, I'm Sristi 👋</h2>
+        <h1 id="hero-title">CSE Student</h1>
+      </div>
+
+      <div class="avatar" aria-label="Sristi portrait">
+        <img src="assets/profile/sristi-profile.jpeg" alt="Sristi" />
+      </div>
+
+      <div class="assistant">
+        <form class="ask" data-form>
+          <input data-input type="text" placeholder="Ask me anything…" autocomplete="off" aria-label="Ask anything about Sristi" />
+          <button type="submit" aria-label="Submit">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </form>
+
+        <div class="tiles" aria-label="Quick questions">
+          <button type="button" data-question="Tell me about Sristi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg><span>Me</span></button>
+          <button type="button" data-question="What projects has Sristi built?"><svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/></svg><span>Projects</span></button>
+          <button type="button" data-question="What skills does Sristi have?"><svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1-4.4-4.3 6.1-.9L12 3z"/></svg><span>Skills</span></button>
+          <button type="button" data-certs data-question="What certifications does Sristi have?"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-3-6 3V3z"/></svg><span>Certs</span></button>
+          <button type="button" data-question="How can I contact Sristi?"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg><span>Contact</span></button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="chat" data-chat hidden aria-hidden="true">
+      <div class="chat-box" role="dialog" aria-modal="true" aria-label="Sristi AI assistant">
+        <header class="chat-header">
+          <div class="bot">
+            <img src="assets/profile/sristi-profile.jpeg" alt="" />
+            <div><strong>Sristi AI</strong><span>Answers from CV only</span></div>
+          </div>
+          <button type="button" data-close aria-label="Close">×</button>
+        </header>
+        <div class="messages" data-messages></div>
+        <form class="chat-input" data-chat-form>
+          <input data-chat-input type="text" placeholder="Ask another question…" autocomplete="off" />
+          <button type="submit" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        </form>
+      </div>
+    </aside>
+
+
+    <aside class="cert-modal" data-cert-modal hidden aria-hidden="true">
+      <div class="cert-panel" role="dialog" aria-modal="true" aria-label="Sristi certificates">
+        <header class="cert-header">
+          <div>
+            <p>Certificate Gallery</p>
+            <h2>Sristi's Certifications</h2>
+          </div>
+          <button type="button" data-cert-close aria-label="Close certificates">×</button>
+        </header>
+        <div class="cert-grid">
+          <button class="cert-card" data-cert-src="assets/certificates/cloud-infrastructure-microsoft.png" data-cert-title="Cloud Infrastructure: Describe Cloud Concepts — Microsoft, August 29, 2026">
+            <img src="assets/certificates/cloud-infrastructure-microsoft.png" alt="Microsoft Cloud Infrastructure certificate" />
+            <span><strong>Cloud Infrastructure: Describe Cloud Concepts</strong><em>Microsoft · Aug 29, 2026</em></span>
+          </button>
+          <button class="cert-card" data-cert-src="assets/certificates/generative-ai-microsoft.png" data-cert-title="Explore Generative AI — Microsoft, August 29, 2026">
+            <img src="assets/certificates/generative-ai-microsoft.png" alt="Microsoft Generative AI certificate" />
+            <span><strong>Explore Generative AI</strong><em>Microsoft · Aug 29, 2026</em></span>
+          </button>
+          <button class="cert-card" data-cert-src="assets/certificates/sql-advanced-hackerrank.png" data-cert-title="SQL Advanced — HackerRank, August 27, 2026">
+            <img src="assets/certificates/sql-advanced-hackerrank.png" alt="HackerRank SQL Advanced certificate" />
+            <span><strong>SQL Advanced</strong><em>HackerRank · Aug 27, 2026</em></span>
+          </button>
+          <button class="cert-card" data-cert-src="assets/certificates/ai-infosys.png" data-cert-title="Introduction to Artificial Intelligence — Infosys, March 27, 2026">
+            <img src="assets/certificates/ai-infosys.png" alt="Infosys Introduction to Artificial Intelligence certificate" />
+            <span><strong>Introduction to Artificial Intelligence</strong><em>Infosys · Mar 27, 2026</em></span>
+          </button>
+          <button class="cert-card" data-cert-src="assets/certificates/python-data-science-infosys.png" data-cert-title="Python for Data Science — Infosys, February 7, 2026">
+            <img src="assets/certificates/python-data-science-infosys.png" alt="Infosys Python for Data Science certificate" />
+            <span><strong>Python for Data Science</strong><em>Infosys · Feb 7, 2026</em></span>
+          </button>
+          <button class="cert-card" data-cert-src="assets/certificates/python-data-science-upgrad.png" data-cert-title="Introduction to Python for Data Science — upGrad, February 4, 2026">
+            <img src="assets/certificates/python-data-science-upgrad.png" alt="upGrad Introduction to Python for Data Science certificate" />
+            <span><strong>Introduction to Python for Data Science</strong><em>upGrad · Feb 4, 2026</em></span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <aside class="cert-lightbox" data-cert-lightbox hidden aria-hidden="true">
+      <button type="button" data-lightbox-close aria-label="Close certificate preview">×</button>
+      <figure>
+        <img data-lightbox-img src="" alt="" />
+        <figcaption data-lightbox-caption></figcaption>
+      </figure>
+    </aside>
+
+    <svg class="filters" aria-hidden="true" width="0" height="0">
+      <filter id="dom-fluid-distort">
+        <feTurbulence id="dom-turbulence" type="fractalNoise" baseFrequency="0.011 0.017" numOctaves="2" seed="4" result="noise" />
+        <feDisplacementMap id="dom-displace" in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
