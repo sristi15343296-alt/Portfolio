@@ -419,14 +419,53 @@ const chatForm = document.querySelector('[data-chat-form]');
 const chatInput = document.querySelector('[data-chat-input]');
 const chatHistory = [];
 const fallbackAnswers = {
-  me: 'Sristi is a Computer Science Engineering student at Lovely Professional University. Her CV shows a foundation in programming, web technologies, databases, Git/GitHub, Figma, and practical application development.',
-  projects: 'Sristi has two featured academic projects: Census Management System and Expense Tracker. Census Management System focuses on centralized citizen/population records, a structured database, search, record management, and CRUD operations. Expense Tracker is a Python application with CRUD functionality, SQL aggregate queries, real-time spending totals, category-wise breakdowns, and database testing.',
-  skills: 'Programming: Python, C, C++. Web: HTML, CSS. Databases and tools: MySQL, MongoDB, Git, GitHub, Figma. Soft skills: Problem Solving, Team Collaboration, Time Management, Adaptability.',
-  certifications: 'Sristi has six certifications: Cloud Infrastructure: Describe Cloud Concepts by Microsoft, Generative AI by Microsoft, SQL Advanced by HackerRank, Introduction to Artificial Intelligence by Infosys, Python For Data Science by Infosys, and Introduction to Python for Data Science by upGrad.',
-  education: 'Education: B.Tech in Computer Science and Engineering at Lovely Professional University with CGPA 8.42, Higher Secondary Education at Kendriya Vidyalaya No. 1 with 74%, and Secondary Education at Kendriya Vidyalaya No. 1 with 80%.',
-  contact: 'You can contact Sristi at sristi15343296@gmail.com. GitHub: github.com/sristi15343296. LinkedIn: linkedin.com/in/sristi104.',
-  achievements: 'Sristi has solved more than 100 programming problems on online coding platforms and conducted a Cybersecurity Awareness Session for school students as part of CDP.'
+  me: '👋 Sristi is a Computer Science Engineering student at Lovely Professional University. She is building a strong foundation in programming, web technologies, databases, Git/GitHub, Figma, and practical application development.',
+  projects: '🚀 Sristi has two featured academic projects: Census Management System and Expense Tracker. Census Management System focuses on centralized citizen/population records, a structured database, search, record management, and CRUD operations. Expense Tracker is a Python application with CRUD functionality, SQL aggregate queries, real-time spending totals, category-wise breakdowns, and database testing.',
+  skills: '👩‍💻 Programming: Python, C, C++. 🌐 Web: HTML, CSS. 🗄️ Databases and tools: MySQL, MongoDB, Git, GitHub, Figma. 🤝 Soft skills: Problem Solving, Team Collaboration, Time Management, Adaptability.',
+  certifications: '📜 Sristi has six certifications: Cloud Infrastructure: Describe Cloud Concepts by Microsoft, Generative AI by Microsoft, SQL Advanced by HackerRank, Introduction to Artificial Intelligence by Infosys, Python For Data Science by Infosys, and Introduction to Python for Data Science by upGrad.',
+  education: '🎓 Education: B.Tech in Computer Science and Engineering at Lovely Professional University with CGPA 8.42, Higher Secondary Education at Kendriya Vidyalaya No. 1 with 74%, and Secondary Education at Kendriya Vidyalaya No. 1 with 80%.',
+  contact: '✉️ You can contact Sristi at sristi15343296@gmail.com. GitHub: github.com/sristi15343296. LinkedIn: linkedin.com/in/sristi104.',
+  achievements: '🏆 Sristi has solved more than 100 programming problems on online coding platforms and conducted a Cybersecurity Awareness Session for school students as part of CDP.'
 };
+
+
+// Project screenshot gallery and lightbox
+const projectModal = document.querySelector('[data-project-modal]');
+const projectClose = document.querySelector('[data-project-close]');
+const projectLightbox = document.querySelector('[data-project-lightbox]');
+const projectLightboxImg = document.querySelector('[data-project-lightbox-img]');
+const projectLightboxCaption = document.querySelector('[data-project-lightbox-caption]');
+const projectLightboxClose = document.querySelector('[data-project-lightbox-close]');
+function openProjectModal(){
+  runFluidTransition(() => {
+    projectModal.hidden = false;
+    projectModal.setAttribute('aria-hidden','false');
+    requestAnimationFrame(()=>projectModal.classList.add('open'));
+  });
+}
+function closeProjectModal(){
+  projectModal.classList.remove('open');
+  projectModal.setAttribute('aria-hidden','true');
+  setTimeout(()=>{projectModal.hidden=true},240);
+}
+function openProjectLightbox(src,title){
+  projectLightboxImg.src = src;
+  projectLightboxImg.alt = title;
+  projectLightboxCaption.textContent = title;
+  projectLightbox.hidden = false;
+  projectLightbox.setAttribute('aria-hidden','false');
+  requestAnimationFrame(()=>projectLightbox.classList.add('open'));
+}
+function closeProjectLightbox(){
+  projectLightbox.classList.remove('open');
+  projectLightbox.setAttribute('aria-hidden','true');
+  setTimeout(()=>{projectLightbox.hidden=true; projectLightboxImg.src='';},240);
+}
+projectClose?.addEventListener('click', closeProjectModal);
+projectModal?.addEventListener('click', e=>{ if(e.target===projectModal) closeProjectModal(); });
+document.querySelectorAll('[data-project-src]').forEach(card=>card.addEventListener('click',()=>openProjectLightbox(card.dataset.projectSrc, card.dataset.projectTitle || 'Project screenshot')));
+projectLightboxClose?.addEventListener('click', closeProjectLightbox);
+projectLightbox?.addEventListener('click', e=>{ if(e.target===projectLightbox) closeProjectLightbox(); });
 
 // Certificate gallery and lightbox
 const certModal = document.querySelector('[data-cert-modal]');
@@ -471,10 +510,34 @@ function openChat(){chat.hidden=false;chat.setAttribute('aria-hidden','false');r
 function closeChat(){runFluidTransition(()=>{chat.classList.remove('open');chat.setAttribute('aria-hidden','true');setTimeout(()=>{chat.hidden=true},240)})}
 function esc(v){return String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;')}
 function formatAnswer(text){const lines=esc(text.trim()).split('\n').filter(Boolean);let html='',list=false;for(const line of lines){const c=line.trim();if(/^[-*•]\s+/.test(c)){if(!list){html+='<ul>';list=true}html+=`<li>${c.replace(/^[-*•]\s+/,'')}</li>`}else{if(list){html+='</ul>';list=false}html+=`<p>${c.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')}</p>`}}if(list)html+='</ul>';return html||'<p>No answer returned.</p>'}
+
+function addSuggestions() {
+  const existing = messages.querySelector('.suggestions');
+  if (existing) existing.remove();
+  const wrap = document.createElement('div');
+  wrap.className = 'suggestions';
+  const items = [
+    ['🚀 Projects', 'What projects has Sristi built?'],
+    ['👩‍💻 Skills', 'What are Sristi\'s skills?'],
+    ['📜 Certificates', 'What certifications does Sristi have?'],
+    ['🎓 Education', 'What is Sristi\'s education?'],
+    ['✉️ Contact', 'How can I contact Sristi?']
+  ];
+  items.forEach(([label, question]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = label;
+    btn.addEventListener('click', () => ask(question));
+    wrap.appendChild(btn);
+  });
+  messages.appendChild(wrap);
+  messages.scrollTop = messages.scrollHeight;
+}
+
 function addMessage(content,who='bot',isHtml=false){const node=document.createElement('div');node.className=`message ${who}`;node.innerHTML=isHtml?content:esc(content);messages.appendChild(node);messages.scrollTop=messages.scrollHeight;return node}
 async function askGemini(question){const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question,history:chatHistory.slice(-6)})});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||'AI unavailable');return data.answer}
-async function ask(question){const clean=question.trim()||'Tell me about Sristi';runFluidTransition(()=>openChat());setTimeout(()=>{addMessage(clean,'user');const typing=addMessage('<span class="typing"><span></span><span></span><span></span></span>','bot',true);askGemini(clean).then(answer=>{typing.innerHTML=formatAnswer(answer);chatHistory.push({role:'user',text:clean},{role:'model',text:answer})}).catch(()=>{typing.innerHTML=formatAnswer(`${fallbackAnswers[localTopic(clean)]}\n\nNote: Gemini is not connected yet. Add GEMINI_API_KEY to enable real AI responses.`)}).finally(()=>{messages.scrollTop=messages.scrollHeight})},300)}
-document.querySelectorAll('[data-question]').forEach(btn=>btn.addEventListener('click',()=>{const q=btn.dataset.question||'Tell me about Sristi';if(input)input.value=q;if(btn.hasAttribute('data-certs')){openCertModal();return;}ask(q)}));
+async function ask(question){const clean=question.trim()||'Tell me about Sristi';runFluidTransition(()=>openChat());setTimeout(()=>{addMessage(clean,'user');const typing=addMessage('<span class="typing"><span></span><span></span><span></span></span>','bot',true);askGemini(clean).then(answer=>{typing.innerHTML=formatAnswer(answer);chatHistory.push({role:'user',text:clean},{role:'model',text:answer})}).catch(()=>{typing.innerHTML=formatAnswer(`${fallbackAnswers[localTopic(clean)]}\n\nNote: Gemini is not connected yet. Add GEMINI_API_KEY to enable real AI responses.`)}).finally(()=>{addSuggestions();messages.scrollTop=messages.scrollHeight})},300)}
+document.querySelectorAll('[data-question]').forEach(btn=>btn.addEventListener('click',()=>{const q=btn.dataset.question||'Tell me about Sristi';if(input)input.value=q;if(btn.hasAttribute('data-projects')){openProjectModal();return;}if(btn.hasAttribute('data-certs')){openCertModal();return;}ask(q)}));
 form?.addEventListener('submit',e=>{e.preventDefault();ask(input?.value||'Tell me about Sristi')});
 chatForm?.addEventListener('submit',e=>{e.preventDefault();const q=chatInput?.value||'';if(!q.trim())return;chatInput.value='';ask(q)});
-closeBtn?.addEventListener('click',closeChat);chat?.addEventListener('click',e=>{if(e.target===chat)closeChat()});document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(certLightbox?.classList.contains('open')) closeCertLightbox(); else if(certModal?.classList.contains('open')) closeCertModal(); else if(chat?.classList.contains('open')) closeChat();}});
+closeBtn?.addEventListener('click',closeChat);chat?.addEventListener('click',e=>{if(e.target===chat)closeChat()});document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(projectLightbox?.classList.contains('open')) closeProjectLightbox(); else if(projectModal?.classList.contains('open')) closeProjectModal(); else if(certLightbox?.classList.contains('open')) closeCertLightbox(); else if(certModal?.classList.contains('open')) closeCertModal(); else if(chat?.classList.contains('open')) closeChat();}});

@@ -44,7 +44,7 @@
 
         <div class="tiles" aria-label="Quick questions">
           <button type="button" data-question="Tell me about Sristi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg><span>Me</span></button>
-          <button type="button" data-question="What projects has Sristi built?"><svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/></svg><span>Projects</span></button>
+          <button type="button" data-projects data-question="What projects has Sristi built?"><svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/></svg><span>Projects</span></button>
           <button type="button" data-question="What skills does Sristi have?"><svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1-4.4-4.3 6.1-.9L12 3z"/></svg><span>Skills</span></button>
           <button type="button" data-certs data-question="What certifications does Sristi have?"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-3-6 3V3z"/></svg><span>Certs</span></button>
           <button type="button" data-question="How can I contact Sristi?"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg><span>Contact</span></button>
@@ -69,6 +69,62 @@
       </div>
     </aside>
 
+
+
+    <aside class="project-modal" data-project-modal hidden aria-hidden="true">
+      <div class="project-panel" role="dialog" aria-modal="true" aria-label="Sristi project screenshots">
+        <header class="project-header">
+          <div>
+            <p>Project Gallery</p>
+            <h2>Featured Projects</h2>
+          </div>
+          <button type="button" data-project-close aria-label="Close project gallery">×</button>
+        </header>
+
+        <section class="project-showcase">
+          <article class="project-info-card">
+            <span>01 — Expense Tracker</span>
+            <h3>ExpenseFlow</h3>
+            <p>Full-stack Python application with CRUD functionality, SQL aggregate queries, real-time spending totals, category-wise breakdowns, and database testing.</p>
+            <div class="project-tags"><span>Python</span><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          </article>
+
+          <div class="project-shot-grid">
+            <button class="project-shot large" data-project-src="assets/projects/expenseflow-dashboard.png" data-project-title="ExpenseFlow Dashboard">
+              <img src="assets/projects/expenseflow-dashboard.png" alt="ExpenseFlow dashboard screenshot" />
+              <span>Dashboard</span>
+            </button>
+            <button class="project-shot" data-project-src="assets/projects/expenseflow-analytics-1.png" data-project-title="ExpenseFlow Analytics View 1">
+              <img src="assets/projects/expenseflow-analytics-1.png" alt="ExpenseFlow analytics screenshot" />
+              <span>Analytics</span>
+            </button>
+            <button class="project-shot" data-project-src="assets/projects/expenseflow-analytics-2.png" data-project-title="ExpenseFlow Analytics View 2">
+              <img src="assets/projects/expenseflow-analytics-2.png" alt="ExpenseFlow analytics chart screenshot" />
+              <span>Analytics Charts</span>
+            </button>
+            <button class="project-shot" data-project-src="assets/projects/expenseflow-savings-goals.png" data-project-title="ExpenseFlow Savings Goals">
+              <img src="assets/projects/expenseflow-savings-goals.png" alt="ExpenseFlow savings goals screenshot" />
+              <span>Savings Goals</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="project-info-card census-note">
+          <span>02 — Census Management System</span>
+          <h3>Census Management System</h3>
+          <p>Centralized citizen/population records, structured database, search and record management, and CRUD operations.</p>
+          <div class="project-tags"><span>Python</span><span>HTML</span><span>CSS</span><span>DBMS</span></div>
+        </section>
+      </div>
+    </aside>
+
+    <aside class="project-lightbox" data-project-lightbox hidden aria-hidden="true">
+      <button type="button" data-project-lightbox-close aria-label="Close project screenshot">×</button>
+      <figure>
+        <img data-project-lightbox-img src="" alt="" />
+        <figcaption data-project-lightbox-caption></figcaption>
+      </figure>
+    </aside>
 
     <aside class="cert-modal" data-cert-modal hidden aria-hidden="true">
       <div class="cert-panel" role="dialog" aria-modal="true" aria-label="Sristi certificates">
